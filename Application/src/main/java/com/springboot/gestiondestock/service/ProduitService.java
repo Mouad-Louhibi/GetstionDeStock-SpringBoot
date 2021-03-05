@@ -1,6 +1,6 @@
 package com.springboot.gestiondestock.service;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,12 @@ public class ProduitService {
 		produitRepository.deleteById(id);
 	}
 	
+	/*
     public List<Produit> getProduitsSortedByName() {
         List<Produit> produits = new ArrayList<>(produitRepository.findAll());
         List<Produit> sortedproduits = new ArrayList<>();
         while(produits.size()!=0)
-        {/*
+        {
             int posMin=0;
             for (int i=1;i<produits.size();i++)
             {
@@ -48,10 +49,11 @@ public class ProduitService {
             
             produits.remove(tmp);
             
-            */
+            
         }
         // return sortedUsers;
         
         return produits;
     }
+    */
 }

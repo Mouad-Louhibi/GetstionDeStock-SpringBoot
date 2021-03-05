@@ -1,5 +1,6 @@
 package com.springboot.gestiondestock.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,14 @@ public class ClientService {
 	public void delete(int id) {
 		clientRepository.deleteById(id);
 	}
+	
+	public List<Client> getUsersSortedById() {
+        List<Client> clients = new ArrayList<>(clientRepository.findAll());
+        List<Client> sortedClients = new ArrayList<>();
+        while(clients.size() != 0)
+        {
+        	
+        }
+        return sortedClients;
+    }
 }
