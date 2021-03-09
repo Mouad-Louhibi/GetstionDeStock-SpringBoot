@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		logger.info("Http Configuration...");
+		logger.info("Mouad Louhibi : Http Configuration...");
 		
 		http
 		 .cors().and().csrf().disable()
@@ -32,12 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		 	.and()
 		 .authorizeRequests()
 		 	.antMatchers(PUBLIC_ENDPOINTS).permitAll()
-		 	.anyRequest().authenticated();
-		 	
-		/*
+		 	.anyRequest().authenticated()
 		 	.and()
 		 .httpBasic();
-	 
-		 */
 	}
 }

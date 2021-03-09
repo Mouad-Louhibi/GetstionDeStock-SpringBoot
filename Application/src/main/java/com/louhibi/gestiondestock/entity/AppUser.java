@@ -1,13 +1,16 @@
-package com.louhibi.gestiondestock.security;
+package com.louhibi.gestiondestock.entity;
 
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +22,7 @@ import com.sun.istack.NotNull;
 public class AppUser implements UserDetails {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_Users")
 	private int id;
 	
@@ -40,6 +44,15 @@ public class AppUser implements UserDetails {
 	
 	public AppUser() {
 		
+	}
+
+	public AppUser(@NotNull int id, @NotNull String email, @NotNull String name, @NotNull String password) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.created = new Date();
 	}
 
 	public AppUser(@NotNull String email,@NotNull String password, @NotNull String name) {
@@ -91,20 +104,16 @@ public class AppUser implements UserDetails {
 		return true;
 	}
 
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public void setEmail(String email) {
@@ -117,6 +126,14 @@ public class AppUser implements UserDetails {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 
 	public void setPassword(String password) {

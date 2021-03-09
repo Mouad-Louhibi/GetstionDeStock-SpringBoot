@@ -1,6 +1,6 @@
-package com.louhibi.gestiondestock.security;
+package com.louhibi.gestiondestock.service;
 
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.List;
 
 import org.apache.juli.logging.Log;
@@ -16,7 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.louhibi.gestiondestock.utils.Initializer;
+import com.louhibi.gestiondestock.entity.AppUser;
+import com.louhibi.gestiondestock.repository.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -35,20 +36,28 @@ public class UserService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-		logger.info("User Loading...");
+		logger.info("Mouad Louhibi : User Loading...");
 		
-		User user = new User(username, username, null);
-		// User user = new User("Mouad", /*passwordEncoder().encode("louhibi")*/ "louhibi", AuthorityUtils.NO_AUTHORITIES);
-		// User user = new User("Mouad", /*passwordEncoder().encode("louhibi")*/ "louhibi", Collections.emptyList());
-		return user;
-	}
-
-	public void save(AppUser user) {
-		user.setPassword(passwordEncoder().encode(user.getPassword()));
-		this.userRepository.save(user);
+		User user4 = new User("Leo", passwordEncoder().encode("Messi"), AuthorityUtils.NO_AUTHORITIES);
+		//User user2 = new User("Mouad", passwordEncoder().encode("louhibi"), AuthorityUtils.NO_AUTHORITIES);
+		//User user3 = new User("root", passwordEncoder().encode("root"), Collections.emptyList());
+		return user4;
 	}
 	
 	public List<AppUser> findAll(){
 		return userRepository.findAll();
+	}
+	
+	public AppUser findOne(int id) {
+		return userRepository.findById(id).get();
+	}
+	
+	public AppUser save(AppUser user) {
+		user.setPassword(passwordEncoder().encode(user.getPassword()));
+		return userRepository.save(user);
+	}
+	
+	public void delete(int id) {
+		userRepository.deleteById(id);
 	}
 }
