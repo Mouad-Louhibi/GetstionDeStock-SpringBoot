@@ -10,9 +10,9 @@ import com.springboot.security.AppUser;
 import com.springboot.security.UserService;
 
 @Component
-public class initializer implements CommandLineRunner {
+public class Initializer implements CommandLineRunner {
 
-	private final Log logger = LogFactory.getLog(initializer.class);
+	private final Log logger = LogFactory.getLog(Initializer.class);
 	
 	@Autowired
 	private UserService userService;
