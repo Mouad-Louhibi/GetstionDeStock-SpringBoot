@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import com.springboot.utils.initializer;
+import com.springboot.utils.Initializer;
 
 @Configuration
 @EnableWebSecurity
@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private final Log logger = LogFactory.getLog(SecurityConfig.class);
 	
 	private final String[] PUBLIC_ENDPOINTS = {
-			"/api/v1/**/*"
+			"/api/v1/**"
 	};
 	
 	@Override
