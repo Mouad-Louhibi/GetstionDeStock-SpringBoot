@@ -14,7 +14,7 @@
 	<name>Application</name>
 	<description>Mouad project for Spring Boot Web Service</description>
 	<properties>
-		<java.version>1.8</java.version>
+    	<start-class>com.dev.webapp.Application</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -40,6 +40,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 
