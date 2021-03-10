@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,15 +41,18 @@ public class UserService implements UserDetailsService {
 		
 		logger.info("Mouad Louhibi : User Loading...");
 		
-		// User user4 = new User("Leo", passwordEncoder().encode("Messi"), AuthorityUtils.NO_AUTHORITIES);
 		AppUser userPost = userRepository.findByName(username);
-		User userDao = new User(userPost.getName(), passwordEncoder().encode(userPost.getPassword()), AuthorityUtils.NO_AUTHORITIES);
+		//User userDao = new User(userPost.getName(), passwordEncoder().encode(userPost.getPassword()), AuthorityUtils.NO_AUTHORITIES);
+		
+		//logger.info("Service : Name : " + userPost.getName() + "  --------  "
+				//+ "Password : " + userPost.getPassword() + "  --------  ");
+		
 		/*
 		if (user == null) {			
 			throw new NotFoundException("User Not Found !");
 		}
 		*/
-		return userDao;
+		return userPost;
 	}
 	
 	public List<AppUser> findAll(){

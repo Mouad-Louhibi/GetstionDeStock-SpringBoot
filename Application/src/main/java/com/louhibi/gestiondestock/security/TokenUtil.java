@@ -18,7 +18,7 @@ public class TokenUtil {
 	private final String CLAIMS_CREATED = "created";
 	
 	//@Value("${auth.expiration}")
-	private Long TOKEN_VALIDITY = 20L;
+	private Long TOKEN_VALIDITY = 86400L;
 	
 	//@Value("${auth.secret}")
 	private String TOKEN_SECRET = "louhibiAPISecret2021";

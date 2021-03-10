@@ -22,13 +22,11 @@ public class Initializer implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		/*
-		if (userService.findAll().isEmpty()) {
+		if (userService.findAll() == null) {
 			logger.info("Mouad Louhibi : No Users accounts found. creating some users");
 		
-			AppUser user = new AppUser("mouad@gmail.com", "louhibi", "Mouad");
-			userService.save(user);
+			AppUser user = new AppUser("root@gmail.com", "root", "root");
+			userService.saveUser(user);
 		}
-		*/
 	}	
 }
