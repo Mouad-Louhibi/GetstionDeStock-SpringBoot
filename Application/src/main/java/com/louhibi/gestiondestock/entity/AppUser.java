@@ -35,7 +35,7 @@ public class AppUser implements UserDetails {
 	private String name;
 	
 	@NotNull
-	@JsonIgnore
+	//@JsonIgnore
 	@Column(name = "Password")
 	private String password;
 	
@@ -45,17 +45,22 @@ public class AppUser implements UserDetails {
 	public AppUser() {
 		
 	}
-
-	public AppUser(@NotNull int id, @NotNull String email, @NotNull String name, @NotNull String password) {
-		super();
-		this.id = id;
-		this.email = email;
+	
+	public AppUser(@NotNull String name, @NotNull String password) {
 		this.name = name;
 		this.password = password;
 		this.created = new Date();
 	}
 
-	public AppUser(@NotNull String email,@NotNull String password, @NotNull String name) {
+	public AppUser(@NotNull String name, @NotNull String email,@NotNull String password) {
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.created = new Date();
+	}
+	
+	public AppUser(@NotNull int id, @NotNull String name, @NotNull String email, @NotNull String password) {
+		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.password = password;

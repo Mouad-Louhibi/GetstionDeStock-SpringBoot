@@ -39,8 +39,8 @@ public class UserController {
 	
 	@PostMapping(value = {"", "/"})
 	public ResponseEntity<AppUser> createNewUser(/*@Valid*/@RequestBody AppUser user) {
-		AppUser newUser = new AppUser(user.getEmail(), user.getPassword(), user.getName());
-		AppUser result = userService.save(newUser);
+		// AppUser newUser = new AppUser(user.getName(), user.getEmail(), user.getPassword());
+		AppUser result = userService.saveUser(user);
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 	

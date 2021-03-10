@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import com.louhibi.gestiondestock.entity.AppUser;
 import com.louhibi.gestiondestock.repository.UserRepository;
 
+import javassist.NotFoundException;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -38,10 +40,15 @@ public class UserService implements UserDetailsService {
 		
 		logger.info("Mouad Louhibi : User Loading...");
 		
-		User user4 = new User("Leo", passwordEncoder().encode("Messi"), AuthorityUtils.NO_AUTHORITIES);
-		//User user2 = new User("Mouad", passwordEncoder().encode("louhibi"), AuthorityUtils.NO_AUTHORITIES);
-		//User user3 = new User("root", passwordEncoder().encode("root"), Collections.emptyList());
-		return user4;
+		// User user4 = new User("Leo", passwordEncoder().encode("Messi"), AuthorityUtils.NO_AUTHORITIES);
+		AppUser userPost = userRepository.findByName(username);
+		User userDao = new User(userPost.getName(), passwordEncoder().encode(userPost.getPassword()), AuthorityUtils.NO_AUTHORITIES);
+		/*
+		if (user == null) {			
+			throw new NotFoundException("User Not Found !");
+		}
+		*/
+		return userDao;
 	}
 	
 	public List<AppUser> findAll(){
@@ -52,7 +59,7 @@ public class UserService implements UserDetailsService {
 		return userRepository.findById(id).get();
 	}
 	
-	public AppUser save(AppUser user) {
+	public AppUser saveUser(AppUser user) {
 		user.setPassword(passwordEncoder().encode(user.getPassword()));
 		return userRepository.save(user);
 	}
