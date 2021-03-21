@@ -1,60 +1,46 @@
 package com.louhibi.gestiondestock.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
 public class Client {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_Client")
 	private int id;
-	
-	@Column(name = "CIN")
-	private String cin; 
-	
-	@Column(name = "Nom")
-	private String nom;
-	
-	@Column(name = "Prenom")
-	private String prenom;
-	
+
+	@Column(name = "NomPrenom")
+	private String nomPrenom;
+
+
 	@Column(name = "Adresse")
 	private String adresse;
-	
+
 	@Column(name = "Ville")
 	private String ville;
-	
+
 	@Column(name = "Tele")
 	private String tele;
+
+	@OneToMany(mappedBy = "clientC")
+	private List<CommandeClient> commandeClientList;
+
+
+	public Client(String nomPrenom, String adresse, String ville, String tele) {
+		this.nomPrenom = nomPrenom;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.tele = tele;
+	}
 
 	public Client() {
 		super();
 	}
 
-	public Client(String cin, String nom, String prenom, String adresse, String ville, String tele) {
-		super();
-		this.cin = cin;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.ville = ville;
-		this.tele = tele;
-	}
-
-	public Client(int id, String cin, String nom, String prenom, String adresse, String ville, String tele) {
-		super();
-		this.id = id;
-		this.cin = cin;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.ville = ville;
-		this.tele = tele;
-	}
 
 	public int getId() {
 		return id;
@@ -64,28 +50,12 @@ public class Client {
 		this.id = id;
 	}
 
-	public String getCin() {
-		return cin;
+	public String getNomPrenom() {
+		return nomPrenom;
 	}
 
-	public void setCin(String cin) {
-		this.cin = cin;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setNomPrenom(String nomPrenom) {
+		this.nomPrenom = nomPrenom;
 	}
 
 	public String getAdresse() {

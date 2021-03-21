@@ -1,15 +1,13 @@
 package com.louhibi.gestiondestock.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "categorie")
 public class Categorie {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_Categorie")
 	private int id;
 	

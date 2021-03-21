@@ -1,42 +1,35 @@
 package com.louhibi.gestiondestock.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "commande")
-public class Commande {
+@Table(name = "commandes")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TypeCommande",discriminatorType = DiscriminatorType.STRING)
+public abstract class Commande {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "ID_Commande")
 	private int id;
-	
-	@Column(name = "ID_Client")
-	private int idClient;
-	
+
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "Date_Commande")
-	private String dateCommande;
-	
+	private Date dateCommande;
+
 	@Column(name = "Montant")
 	private int montant;
 
-	public Commande() {
-		super();
-	}
+	@Column(name = "TypeCommande",insertable= false, updatable= false)
+	@Enumerated(value = EnumType.STRING)
+	TypeCommande typeCommande;
 
-	public Commande(int idClient, String dateCommande, int montant) {
-		super();
-		this.idClient = idClient;
-		this.dateCommande = dateCommande;
-		this.montant = montant;
-	}
-
-	public Commande(int id, int idClient, String dateCommande, int montant) {
-		super();
+	public Commande(int id, int idClient, Date dateCommande, int montant, List<LigneCommande> ligneCommandes) {
 		this.id = id;
-		this.idClient = idClient;
 		this.dateCommande = dateCommande;
 		this.montant = montant;
 	}
@@ -49,19 +42,11 @@ public class Commande {
 		this.id = id;
 	}
 
-	public int getIdClient() {
-		return idClient;
-	}
-
-	public void setIdClient(int idClient) {
-		this.idClient = idClient;
-	}
-
-	public String getDateCommande() {
+	public Date getDateCommande() {
 		return dateCommande;
 	}
 
-	public void setDateCommande(String dateCommande) {
+	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
 	}
 
@@ -72,4 +57,21 @@ public class Commande {
 	public void setMontant(int montant) {
 		this.montant = montant;
 	}
+
+
+	public TypeCommande getTypeCommande() {
+		return typeCommande;
+	}
+
+	public void setTypeCommande(TypeCommande typeCommande) {
+		this.typeCommande = typeCommande;
+	}
+
+
+	public Commande() {
+		super();
+	}
+
 }
+
+

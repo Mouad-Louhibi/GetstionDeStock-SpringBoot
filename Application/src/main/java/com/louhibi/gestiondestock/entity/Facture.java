@@ -1,44 +1,43 @@
 package com.louhibi.gestiondestock.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
-@Table(name = "facture")
-public class Facture {
+import javax.persistence.*;
+import java.util.Date;
+
+
+@MappedSuperclass
+@Table(name = "factures")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TypeFacture",discriminatorType = DiscriminatorType.STRING)
+public abstract class Facture {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_Facture")
 	private int id;
-	
-	@Column(name = "ID_Client")
-	private int idClient;
-	
+
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name = "Date_Facture")
-	private String dateFacture;
-	
-	@Column(name = "Montant")
-	private int montant;
+	private Date dateFacture;
+
+	@Column(name = "TypeFacture",insertable= false, updatable= false)
+	@Enumerated(value = EnumType.STRING)
+	TypeFacture typeFacture;
 
 	public Facture() {
 		super();
 	}
 
-	public Facture(int idClient, String dateFacture, int montant) {
+	public Facture(Date dateFacture) {
 		super();
-		this.idClient = idClient;
 		this.dateFacture = dateFacture;
-		this.montant = montant;
 	}
 
-	public Facture(int id, int idClient, String dateFacture, int montant) {
+	public Facture(int id, Date dateFacture, int montant) {
 		super();
 		this.id = id;
-		this.idClient = idClient;
 		this.dateFacture = dateFacture;
-		this.montant = montant;
 	}
 
 	public int getId() {
@@ -49,27 +48,12 @@ public class Facture {
 		this.id = id;
 	}
 
-	public int getIdClient() {
-		return idClient;
-	}
-
-	public void setIdClient(int idClient) {
-		this.idClient = idClient;
-	}
-
-	public String getDateCommande() {
+	public Date getDateCommande() {
 		return dateFacture;
 	}
 
-	public void setDateCommande(String dateFacture) {
+	public void setDateCommande(Date dateFacture) {
 		this.dateFacture = dateFacture;
 	}
 
-	public int getMontant() {
-		return montant;
-	}
-
-	public void setMontant(int montant) {
-		this.montant = montant;
-	}
 }

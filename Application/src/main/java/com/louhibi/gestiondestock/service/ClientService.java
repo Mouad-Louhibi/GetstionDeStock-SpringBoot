@@ -26,11 +26,11 @@ public class ClientService {
 	public Client save(Client client) {
 		return clientRepository.save(client);
 	}
-	
+
 	public void delete(int id) {
 		clientRepository.deleteById(id);
 	}
-	
+
 	public List<Client> getUsersSortedById() {
         List<Client> clients = new ArrayList<>(clientRepository.findAll());
         List<Client> sortedClients = new ArrayList<>();

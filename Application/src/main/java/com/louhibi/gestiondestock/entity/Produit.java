@@ -1,103 +1,132 @@
 package com.louhibi.gestiondestock.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "produit")
 public class Produit {
 
-	@Id
-	@Column(name = "ID_Produit")
-	private int id;
-	
-	@Column(name = "Libelle")
-	private String libelle;
-	
-	@Column(name = "Genre")
-	private String genre;
-	
-	@Column(name = "Prix")
-	private int prix;
-	
-	@Column(name = "Cout")
-	private int cout;
-	
-	@Column(name = "ID_Categorie")
-	private int idCategorie;
-	
-	public Produit() {
-		super();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_Produit")
+    private int id;
 
-	public Produit(String libelle, String genre, int prix, int cout, int idCategorie) {
-		super();
-		this.libelle = libelle;
-		this.genre = genre;
-		this.prix = prix;
-		this.cout = cout;
-		this.idCategorie = idCategorie;
-	}
-	
-	public Produit(int id, String libelle, String genre, int prix, int cout, int idCategorie) {
-		super();
-		this.id = id;
-		this.libelle = libelle;
-		this.genre = genre;
-		this.prix = prix;
-		this.cout = cout;
-		this.idCategorie = idCategorie;
-	}
+    @Column(name = "Libelle")
+    private String libelle;
 
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getLibelle() {
-		return libelle;
-	}
+    @Column(name = "Reference")
+    private String reference;
 
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
-	}
+    @Column(name = "Genre")
+    @Enumerated(value = EnumType.STRING)
+    private Genre genre;
 
-	public String getGenre() {
-		return genre;
-	}
+    @Column(name = "Prix")
+    private int prix;
 
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
+    @Column(name = "Cout")
+    private int cout;
 
-	public int getPrix() {
-		return prix;
-	}
+    @Column(name = "QteDispo")
+    private int qteDispo;
 
-	public void setPrix(int prix) {
-		this.prix = prix;
-	}
+    @Column(name = "QteStock")
+    private int qteStock;
 
-	public int getCout() {
-		return cout;
-	}
-	
-	public void setCout(int cout) {
-		this.cout = cout;
-	}
+    @Column(name = "TypeProduit")
+    @Enumerated(value = EnumType.STRING)
+    TypeProduit typeProduit;
 
-	public int getIdCategorie() {
-		return idCategorie;
-	}
+    @OneToMany(mappedBy = "produitLigneCommande")
+    List<LigneCommandeClient> produitLigneCommande;
 
-	public void setIdCategorie(int idCategorie) {
-		this.idCategorie = idCategorie;
-	}
+
+    public Produit() {
+        super();
+    }
+
+    public Produit(String libelle, Genre genre, int prix, int cout, int qteStock, int qteDispo,TypeProduit typeProduit) {
+        super();
+        this.libelle = libelle;
+        this.genre = genre;
+        this.prix = prix;
+        this.cout = cout;
+        this.qteDispo = qteDispo;
+        this.qteStock = qteStock;
+        this.typeProduit = typeProduit;
+    }
+
+    public Produit(int id, String libelle, Genre genre, int prix, int cout,TypeProduit typeProduit) {
+        super();
+        this.id = id;
+        this.libelle = libelle;
+        this.genre = genre;
+        this.prix = prix;
+        this.cout = cout;
+        this.typeProduit = typeProduit;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
+    public int getCout() {
+        return cout;
+    }
+
+    public void setCout(int cout) {
+        this.cout = cout;
+    }
+
+    public int getQteDispo() {
+        return qteDispo;
+    }
+
+    public void setQteDispo(int qteDispo) {
+        this.qteDispo = qteDispo;
+    }
+
+    public TypeProduit getTypeProduit() { return typeProduit; }
+
+    public void setTypeProduit(TypeProduit typeProduit) { this.typeProduit = typeProduit; }
+
+    public int getQteStock() {
+        return qteStock;
+    }
+
+    public void setQteStock(int qteStock) {
+        this.qteStock = qteStock;
+    }
 }
